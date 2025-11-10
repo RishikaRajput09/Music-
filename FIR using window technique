@@ -1,0 +1,42 @@
+%To design a 25-tap lowpass filter with cutoff frequency 0.5pi rad using
+%rectangular and Hamming windows and plot their frequency 
+response
+wc=0.5*pi;
+N=25; alpha=(N-1)/2; eps=0.001;
+n=0:1:N-1;
+hd=sin(wc*(n-alpha+eps))./(pi*(n-alpha+eps));
+wr=boxcar(N); %Rectangular window sequence
+hn=hd.*wr'; %Filter coefficients
+w=0:0.01:pi;
+h=freqz(hn,1,w);
+plot(w/pi,abs(h));
+hold on
+wh=hamming(N); %Hamming window sequence
+hn=hd.*wh'; %Filter coefficients
+w=0:0.01:pi;
+h=freqz(hn,1,w);
+plot(w/pi,abs(h),'-.');grid;
+xlabel('Normalised frequency \omega/\pi');
+ylabel('Magnitude');hold off
+
+b) %To design a 25-tap bandpass filter with cutoff 
+frequency 0.25pic and 0.75 % rad using rectangular and 
+Hamming windows and plot their frequency response 
+wc1=0.25*pi; wc2=0.75*pi; %Cutoff frequencies 
+N=25; a=(N-1)/2; eps=0.001; 
+n=0:1:N-1; 
+hd=(sin(wc2*(n-a+eps))-sin(wc1*(n-a+eps)))./(pi*(n
+a+eps)); 
+wr=boxcar(N); %Rectangular window sequence 
+hn=hd.*wr'; %Filter coefficients 
+w=0:0.01:pi; 
+h=freqz(hn,1,w); 
+plot(w/pi,abs(h)); 
+hold on 
+wh=hamming(N); %Hamming window sequence 
+hn=hd.*wh'; %Filter coefficients 
+w=0:0.01:pi; 
+h=freqz(hn,1,w); 
+plot(w/pi,abs(h),'-.');grid; 
+xlabel('Normalised frequency \omega/\pi'); 
+ylabel('Magnitude');hold off
