@@ -1,0 +1,11 @@
+a=10^6;
+b=[1,1];
+fs=5;
+[az,bz]=impinvar(a,b,fs)
+[Ha,Wa] = freqs(a,b,512);  
+[Hz,Wz] = freqz(az,bz,512,10);
+plot(Wa/(2*pi),20*log10(abs(Ha)),'LineWidth',2); hold on;
+plot(Wz,20*log10(abs(Hz)),'r--');
+xlabel('Frequency (Hz)'), ylabel('Magnitude (dB)');
+title('Magnitude Response Comparison');
+legend('Analog Filter','Digital Filter');
