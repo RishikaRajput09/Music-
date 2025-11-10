@@ -1,0 +1,120 @@
+ xn1 = [1 2 3 4];
+ xn2 = [0 1 2];
+ n1 = length(xn1);
+ n2 = length(xn2);
+
+ %% Circular Convolution
+ Nc = max(n1, n2);
+ Xk1_circular = fft(xn1, Nc);
+ Xk2_circular = fft(xn2, Nc);
+ Xk_circular  = Xk1_circular .* Xk2_circular;
+ xn_circular = ifft(Xk_circular, Nc)
+ mag_Xk_circular    = abs(Xk_circular);
+ mag_Xk1_circular   = abs(Xk1_circular);
+ mag_Xk2_circular   = abs(Xk2_circular);
+ phase_Xk_circular   = rad2deg(angle(Xk_circular));    % Convert to degrees
+ phase_Xk1_circular  = rad2deg(angle(Xk1_circular));
+ phase_Xk2_circular  = rad2deg(angle(Xk2_circular));
+
+ % Plot Circular Convolution Magnitudes
+ figure;
+ subplot(3,1,1);
+ stem(0:Nc-1, mag_Xk_circular, 'filled');
+ xlabel('Frequency Bin (k)');
+ ylabel('|Xkcircular|');
+ title('Circular Convolution: |Xk|');
+ grid on;
+ subplot(3,1,2);
+ stem(0:Nc-1, mag_Xk1_circular, 'filled');
+ xlabel('Frequency Bin (k)');
+ ylabel('|Xk1|');
+ title('Circular Convolution: |Xk1|');
+ grid on;
+ subplot(3,1,3);
+ stem(0:Nc-1, mag_Xk2_circular, 'filled');
+ xlabel('Frequency Bin (k)');
+ ylabel('|Xk2|');
+ title('Circular Convolution: |Xk2|');
+
+ % Plot Circular Convolution Phases (in degrees)
+ figure;
+ subplot(3,1,1);
+ stem(0:Nc-1, phase_Xk_circular, 'filled');
+ xlabel('Frequency Bin (k)');
+ ylabel('Phase(Xk) [deg]');
+ title('Circular Convolution: Phase of Xk');
+ ylim([-360 360]);
+ grid on;
+ subplot(3,1,2);
+ stem(0:Nc-1, phase_Xk1_circular, 'filled');
+ xlabel('Frequency Bin (k)');
+ ylabel('Phase(Xk1) [deg]');
+ title('Circular Convolution: Phase of Xk1');
+ ylim([-360 360]);
+ grid on;
+ subplot(3,1,3);
+ stem(0:Nc-1, phase_Xk2_circular, 'filled');
+ xlabel('Frequency Bin (k)');
+ ylabel('Phase(Xk2) [deg]');
+ title('Circular Convolution: Phase of Xk2');
+ ylim([-360 360]);
+grid on;
+
+
+ %% Linear Convolution
+ Nl = n1 + n2 - 1;
+ Xk1_linear = fft(xn1, Nl);
+ Xk2_linear = fft(xn2, Nl);
+ Xk_linear  = Xk1_linear .* Xk2_linear;
+ xn_linear  = ifft(Xk_linear, Nl)
+ mag_Xk_linear    = abs(Xk_linear);
+ mag_Xk1_linear   = abs(Xk1_linear);
+ mag_Xk2_linear   = abs(Xk2_linear);
+ phase_Xk_linear   = rad2deg(angle(Xk_linear));    % Convert to degrees
+ phase_Xk1_linear  = rad2deg(angle(Xk1_linear));
+ phase_Xk2_linear  = rad2deg(angle(Xk2_linear));
+
+ % Plot Linear Convolution Magnitudes
+ figure;
+ subplot(3,1,1);
+stem(0:Nl-1, mag_Xk_linear, 'filled');
+ xlabel('Frequency Bin (k)');
+ ylabel('|Xklinear|');
+ title('Linear Convolution: |Xk|');
+ grid on;
+ subplot(3,1,2);
+ stem(0:Nl-1, mag_Xk1_linear, 'filled');
+ xlabel('Frequency Bin (k)');
+ ylabel('|Xk1|');
+ title('Linear Convolution: |Xk1|');
+ grid on;
+ subplot(3,1,3);
+ stem(0:Nl-1, mag_Xk2_linear, 'filled');
+ xlabel('Frequency Bin (k)');
+ ylabel('|Xk2|');
+ title('Linear Convolution: |Xk2|');
+ grid on;
+
+ % Plot Linear Convolution Phases (in degrees)
+ figure;
+ subplot(3,1,1);
+ stem(0:Nl-1, phase_Xk_linear, 'filled');
+ xlabel('Frequency Bin (k)');
+ ylabel('Phase(Xk) [deg]');
+title('Linear Convolution: Phase of Xk');
+ ylim([-360 360]);
+ grid on;
+ subplot(3,1,2);
+ stem(0:Nl-1, phase_Xk1_linear, 'filled');
+ xlabel('Frequency Bin (k)');
+ ylabel('Phase(Xk1) [deg]');
+ title('Linear Convolution: Phase of Xk1');
+ ylim([-360 360]);
+ grid on;
+ subplot(3,1,3);
+ stem(0:Nl-1, phase_Xk2_linear, 'filled');
+ xlabel('Frequency Bin (k)');
+ ylabel('Phase(Xk2) [deg]');
+ title('Linear Convolution: Phase of Xk2');
+ ylim([-360 360]);
+ grid on;
