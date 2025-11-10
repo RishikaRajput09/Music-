@@ -1,0 +1,6 @@
+b=[0 1]
+a=[1 -0.6  0.08]
+w=0:0.1:pi
+freq=Freqz(b,a,w)
+Phase=abs(freq)
+Mag=angle(freq)
