@@ -1,0 +1,6 @@
+a=10^6 
+b=[1 1] 
+Fs=5  
+[Zd,Pd]=bilinear(a,b,Fs) 
+w=0:0.01:6*pi 
+freqz(Zd,Pd,w) 
